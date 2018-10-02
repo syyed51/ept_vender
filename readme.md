@@ -17,5 +17,6 @@ If you wish to experiment, make a clone of this repo and work on it.
 
 ## Problems
 
-1. webpack-html-plugin is not working.
-1. eslint auto formatting not working.
+1. `webpack-html-plugin` is not working.
+1. `eslint auto formatting` not working.
+1. `babel-plugin-transform-class-properties` is not working
