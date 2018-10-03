@@ -1,9 +1,16 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addBook } from './actions';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.counter = 1;
+  }
   componentDidMount() {
     // try {
-      // throw new Error("Catch me, if you can !");
+    // throw new Error("Catch me, if you can !");
     // } catch (err) {
     //   console.log(err);
     //   throw err;
@@ -11,27 +18,49 @@ class App extends Component {
     // }
   }
 
-  classMethod = ()=> console.log("call method are working now");
+  addNewBook = (evt) => {
+    var book = { id: this.counter++, title: "Old man and C", author: "Ernest Hamingway" }
+    this.props.addBook(book)
+  }
   render() {
-
+    console.log("App State:", this.props.appState);
 
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Oxford library</h1>
         </header>
         <p className="">
-          This app should not have:
+          Here is my catalogue of book:
         </p>
         <ul>
-          <li>Redux</li>
-          <li>Rx</li>
-          <li>Observables</li>
+          <Rack list={this.props.appState} />
         </ul>
-        <button>Create transaction</button>
+        <button type="button" onClick={this.addNewBook}>Add new book</button>
       </div>
     );
   }
 }
+let Rack = ({ list }) => {
+  return (
+    list.map(item => <Book book={item} key={item.id} />)
+  );
+}
 
-export default App;
+let Book = ({ book }) => {
+  console.log({ book });
+  return (
+    <li>
+      {book.title + ' by ' + book.author}
+      <button type="button"> *</button>
+    </li>
+  );
+}
+let mapState = state => ({
+  appState: state
+});
+
+let mapDispatch = dispatch => bindActionCreators({
+  addBook: addBook
+}, dispatch);
+export default connect(mapState, mapDispatch)(App);

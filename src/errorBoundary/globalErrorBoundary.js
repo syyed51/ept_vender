@@ -1,5 +1,5 @@
 /* eslint-disable */
-import CONFIG from './config';
+import CONFIG from '../config';
 window.onerror = function (message, source, lineno, colno, error) {
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', CONFIG.API_ERROR_LOG_ENPOINT, true);
@@ -10,7 +10,7 @@ window.onerror = function (message, source, lineno, colno, error) {
 			console.error("Global error boundry window.onerror");
 		}
 	};
-	var data = JSON.stringify({message: message, source: source, lineno: lineno, colno: colno,});
-	xhr.send(data);
+	// var data = JSON.stringify({message: message, source: source, lineno: lineno, colno: colno,});
+	// xhr.send(data);
 	return false;
 };

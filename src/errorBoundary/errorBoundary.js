@@ -7,13 +7,17 @@ class ErrorBoundary extends Component {
       }
       
       componentDidCatch(error, errorInfo) {
-        this.setState({
+        this. setState({
           error: error,
           errorInfo: errorInfo
         })
       }
+   
+   
 
+      
   render() {
+    
     if (this.state.errorInfo) {
         return (
           <div>
@@ -23,6 +27,7 @@ class ErrorBoundary extends Component {
               <br />
               {this.state.errorInfo.componentStack}
             </details>
+            { this.props.children }
           </div>
         );
       }
