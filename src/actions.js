@@ -1,3 +1,3 @@
-const addBook = payload => ({ type: "add", payload });
-
-export { addBook };
+const addBook = payload => ({ type: 'add', payload });
+const toogleStatusAction = id => ({ type: 'toogle', id });
+export { addBook, toogleStatusAction };

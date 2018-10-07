@@ -1,37 +1,35 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class ErrorBoundary extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { error: null, errorInfo: null };
-      }
-      
-      componentDidCatch(error, errorInfo) {
-        this. setState({
-          error: error,
-          errorInfo: errorInfo
-        })
-      }
-   
-   
+  constructor(props) {
+    super(props);
+    this.state = { errorInfo: null };
+  }
 
-      
+  componentDidCatch(error, errorInfo) {
+    this.setState({
+      errorInfo,
+    });
+  }
+
   render() {
-    
-    if (this.state.errorInfo) {
-        return (
-          <div>
-            <h2>Something went wrong.</h2>
-            <details style={{ whiteSpace: 'pre-wrap' }}>
-              {this.state.error && this.state.error.toString()}
-              <br />
-              {this.state.errorInfo.componentStack}
-            </details>
-            { this.props.children }
-          </div>
-        );
-      }
-    return this.props.children;
+    const { errorInfo } = this.state;
+    const { children } = this.props;
+    if (errorInfo) {
+      return (
+        <div>
+          <h2>Your component has crashed</h2>
+          <details style={{ whiteSpace: 'pre-wrap' }}>
+            {/* {error && error.toString()} */}
+            {/* <br /> */}
+            {errorInfo.componentStack}
+          </details>
+        </div>
+      );
+    }
+
+    return children;
   }
 }
 
