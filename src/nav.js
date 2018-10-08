@@ -1,11 +1,13 @@
 import React from 'react';
 
 const Nav = () => (
-  <ul>
-    <li>favourites</li>
-    <li>Regular</li>
-    <li>All</li>
-  </ul>
+  <nav>
+    <ul>
+      <li>favourites</li>
+      <li>Regular</li>
+      <li>All</li>
+    </ul>
+  </nav>
 );
 
 export default Nav;

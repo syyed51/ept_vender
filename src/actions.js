@@ -1,3 +1,4 @@
 const addBook = payload => ({ type: 'add', payload });
 const toogleStatusAction = id => ({ type: 'toogle', id });
-export { addBook, toogleStatusAction };
+const loadBooks = books => ({ type: 'loadBoks', books });
+export { addBook, toogleStatusAction, loadBooks };

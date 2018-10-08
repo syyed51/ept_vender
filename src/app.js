@@ -3,16 +3,17 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addBook, toogleStatusAction } from './actions';
 import Nav from './nav';
+import Header from './header';
 
-class App extends       Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.counter = 0;
   }
-  
-  componentDidMount () {
+
+  componentDidMount() {
     // try {
-    // throw new Error("Catch me, if you can !");
+    // throw new Error("Catch me, if you can!");
     // } catch (err) { console.log(err)}
   }
 
@@ -25,18 +26,18 @@ class App extends       Component {
 
     return (
       <div className="App">
-      <Nav />
-        <header className="App-header">
-          <h1 className="App-title">Oxford library</h1>
-        </header>
-        <p className="">
-          Here is my catalogue of book:
+        <Header />
+        <Nav />
+        <div className="content">
+          <p>
+            Catalogue
         </p>
-        <ul>
-          <Rack list={this.props.appState} toogleAction={this.props.toogle} />
+          <ul>
+            <Rack list={this.props.appState} toogleAction={this.props.toogle} />
 
-        </ul>
-        <button type="button" onClick={this.addNewBook}>Add new book</button>
+          </ul>
+          <button type="button" onClick={this.addNewBook}>Add new book</button>
+        </div>
       </div>
     );
   }
@@ -44,13 +45,13 @@ class App extends       Component {
 let Rack = ({ list = [], toogleAction }) => {
   return (
     list.map(item => <Book book={item} key={item.id} toogleAction={toogleAction} />)
-    );
+  );
 }
 
 let Book = ({ book = {}, toogleAction }) => {
   return (
-    <li style={book.isFavourite? {color:'red',height:50}:{color:'green',height:50}} 
-    onClick={() => toogleAction(book.id)} >
+    <li style={book.isFavourite ? { color: 'red', height: 50 } : { color: 'green', height: 50 }}
+      onClick={() => toogleAction(book.id)} >
       {book.title + ' by ' + book.author}
     </li>
   );
@@ -63,4 +64,5 @@ let mapDispatch = dispatch => bindActionCreators({
   addBook: addBook,
   toogle: toogleStatusAction
 }, dispatch);
+
 export default connect(mapState, mapDispatch)(App);
